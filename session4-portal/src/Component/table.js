@@ -1,49 +1,95 @@
 import React, { Component } from "react";
 import "./table.css";
 import Modal from "./Modal";
-//import Modal from './Component/Modal';
 
 class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      updateUser: {}
     };
-    
   }
 
-  handleShow = () => {
-    this.setState({ showModal: true });
-  }
+  handleShow = index => {
+    //const obj = this.props.userList[index];
+    this.setState({
+      showModal: true,
+     // updateUser: { ...obj }
+    });
+  };
 
   onCancel = () => {
-    this.showModal(false);
-  }
-  onSubmitUser() {}
+    this.setState({ showModal: false });
+  };
+
+  onChangeInfo = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+  onSubmitUser = (event,index) => {
+    event.preventDefault();
+    this.props.updateUsers(this.state.updateUser, index);
+    console.log(index)
+  };
 
   render() {
+    //const { updateUser } = this.state;
     const modal = this.state.showModal ? (
       <Modal>
-        <form>
-          <div class="form-group" onSubmit={this.onSubmitUser}>
-            <label for="">label</label>
-            <input name="txtName" type="text" class="form-control" />
-            <input name="txtDob" type="text" class="form-control" />
-            <select name="sltGender" class="form-control" required="required">
-              <option value="male" />
-              <option value="female" />
-            </select>
+        <div className="modal">
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <h3 className="panel-title">Edit user infomation</h3>
+            </div>
+            <div className="panel-body">
+              <form onSubmit={this.onSubmitUser}>
+                <div className="form-group">
+                  <input
+                    name="txtName"
+                    type="text"
+                    className="form-control"
+                    //defaultValue={updateUser.txtName}
+                    onChange={this.onChangeInfo}
+                  />
+                  <input
+                    name="txtDob"
+                    type="date"
+                    className="form-control"
+                    //defaultValue={updateUser.txtDob}
+                    onChange={this.onChangeInfo}
+                  />
+                  <select
+                    name="sltGender"
+                    className="form-control"
+                    required="required"
+                    //defaultValue={updateUser.sltGender}
+                  >
+                    <option value="male" onChange={this.onChangeInfo}>
+                      Male
+                    </option>
+                    <option value="female" onChange={this.onChangeInfo}>
+                      Female
+                    </option>
+                  </select>
+                </div>
+                <button
+                  type=""
+                  className="btn btn-default"
+                  onClick={this.onCancel}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">
-            Submit
-          </button>
-          <button type="" class="btn btn-default" onClick={this.onCancel}>
-            Cancle
-          </button>
-        </form>
+        </div>
       </Modal>
     ) : null;
-
     var tbFormat = {
       textAlign: "left"
     };
@@ -57,10 +103,10 @@ class Table extends Component {
           <td>
             <span
               className="glyphicon glyphicon-edit"
-              onClick={this.handleShow}
+              onClick={() => this.handleShow(index)}
             />
           </td>
-          {modal}
+
           <td>
             <span
               className="glyphicon glyphicon-trash"
@@ -84,6 +130,7 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>{element}</tbody>
+        {modal}
       </table>
     );
   }

@@ -43,10 +43,10 @@ function App() {
   const controlShowSidebar = () =>{
     if(showSidebar){
       setControl({display: 'none'});
-      setShowSidebar(false)
+    setShowSidebar(false)
     }else{
       setControl({display: 'block'});
-      setShowSidebar(true)
+    setShowSidebar(true)
     }
   }
 

@@ -19,3 +19,16 @@
     position: relative;
     z-index: 999;
   }
+
+  .modal form{
+    width: 600px;
+  }
+  .modal input{
+    margin: 10px 0px;
+  }
+  .modal button{
+    float: right;
+  }
+  .modal button[type=submit]{
+    margin-right: 20px;
+  }

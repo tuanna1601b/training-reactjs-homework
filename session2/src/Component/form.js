@@ -8,14 +8,13 @@ class Form extends Component {
         newUser: {txtName: '', txtDob: '', sltGender: 'male'}
     };
   }
-  onChangeInput = (event) => {
+  onChangeInput = event => {
     var target = event.target;
     var name = target.name;
     var value = target.value;
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   }
 
   onAddElement = (event) => {
