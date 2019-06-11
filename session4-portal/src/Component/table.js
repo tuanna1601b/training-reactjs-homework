@@ -7,11 +7,11 @@ class Table extends Component {
     super(props);
     this.state = {
       showModal: false,
-      updateUser: {}
+      updateUser: {txtName: "", txtDob: "", sltGender: "male" }
     };
   }
 
-  handleShow = index => {
+  handleShow = () => {
     //const obj = this.props.userList[index];
     this.setState({
       showModal: true,
@@ -25,13 +25,12 @@ class Table extends Component {
 
   onChangeInfo = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      updateUser: {...this.state.updateUser,[event.target.name]: event.target.value}
     });
   };
-  onSubmitUser = (event,index) => {
+  onSubmitUser = event => {
     event.preventDefault();
-    this.props.updateUsers(this.state.updateUser, index);
-    console.log(index)
+    this.props.update(this.state.updateUser);
   };
 
   render() {
@@ -44,7 +43,7 @@ class Table extends Component {
               <h3 className="panel-title">Edit user infomation</h3>
             </div>
             <div className="panel-body">
-              <form onSubmit={this.onSubmitUser}>
+              <form onSubmit = {this.onSubmitUser}>
                 <div className="form-group">
                   <input
                     name="txtName"
@@ -65,11 +64,13 @@ class Table extends Component {
                     className="form-control"
                     required="required"
                     //defaultValue={updateUser.sltGender}
+                    onChange={this.onChangeInfo}
+                    value={this.state.updateUser.sltGender}
                   >
-                    <option value="male" onChange={this.onChangeInfo}>
+                    <option value="male">
                       Male
                     </option>
-                    <option value="female" onChange={this.onChangeInfo}>
+                    <option value="female">
                       Female
                     </option>
                   </select>
@@ -103,7 +104,7 @@ class Table extends Component {
           <td>
             <span
               className="glyphicon glyphicon-edit"
-              onClick={() => this.handleShow(index)}
+              onClick={() => this.handleShow()}
             />
           </td>
 

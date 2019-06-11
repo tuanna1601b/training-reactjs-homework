@@ -28,12 +28,12 @@ class App extends Component {
     });
   };
 
-  updateUser = (user,index) => {
-    const { users } = this.state;
-    this.setState({
-      users: [...users.slice(0, index),user, ...users.slice(index)]
-    });
-  }
+  updateUser = user => {
+      const { users } = this.state;
+      this.setState({
+        users: [...users, user]
+      });
+  };
 
   render() {
     return (
@@ -43,7 +43,7 @@ class App extends Component {
           userList={this.state.users}
           delUser={this.delUser}
           showEditModal={this.showEditModal}
-          updateUsers={this.UpdateUser}
+          update={this.updateUser}
         />
       </div>
     );

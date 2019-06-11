@@ -4,9 +4,7 @@ import "./form.css";
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      txtName: "", txtDob: "", sltGender: "male" 
-    };
+    this.state = { txtName: "", txtDob: "", sltGender: "male" };
   }
   onChangeInput = event => {
     this.setState({
@@ -14,9 +12,10 @@ class Form extends Component {
     })
   };
 
-  onAddElement = event => {
+  onAddElement = (event) => {
     event.preventDefault(); // tránh web tự load lại sau khi ấn submit
     this.props.addUser(this.state);
+    console.log(this.state)
   };
 
   render() {
