@@ -28,12 +28,14 @@ class App extends Component {
     });
   };
 
-  updateUser = user => {
-      const { users } = this.state;
-      this.setState({
-        users: [...users, user]
-      });
-  };
+  updateUser = (index, user) => {
+    const {users} = this.state;
+    let tranformer = users;
+    tranformer[index] = user;
+    this.setState({
+      users: [...tranformer]
+    });
+  }
 
   render() {
     return (

@@ -15,7 +15,6 @@ class Form extends Component {
   onAddElement = (event) => {
     event.preventDefault(); // tránh web tự load lại sau khi ấn submit
     this.props.addUser(this.state);
-    console.log(this.state)
   };
 
   render() {

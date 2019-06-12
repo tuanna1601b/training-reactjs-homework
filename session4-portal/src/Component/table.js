@@ -7,15 +7,15 @@ class Table extends Component {
     super(props);
     this.state = {
       showModal: false,
-      updateUser: {txtName: "", txtDob: "", sltGender: "male" }
+      updateUser: {txtName: "", txtDob: "", sltGender: "male" },
+      currentPos: 0
     };
   }
 
-  handleShow = () => {
-    //const obj = this.props.userList[index];
+  handleShow = index => {
     this.setState({
       showModal: true,
-     // updateUser: { ...obj }
+      currentPos: index
     });
   };
 
@@ -30,7 +30,10 @@ class Table extends Component {
   };
   onSubmitUser = event => {
     event.preventDefault();
-    this.props.update(this.state.updateUser);
+    this.setState({
+      showModal: false
+    })
+    this.props.update(this.state.currentPos,this.state.updateUser);
   };
 
   render() {
@@ -104,7 +107,7 @@ class Table extends Component {
           <td>
             <span
               className="glyphicon glyphicon-edit"
-              onClick={() => this.handleShow()}
+              onClick={() => this.handleShow(index)}
             />
           </td>
 
